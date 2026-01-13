@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Свадебное приглашение</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #fdf6f0, #f3e6d8);
+  text-align: center;
+  overflow-x: hidden;
+}
+section {
+  min-height: 100vh;
+  padding: 60px 20px;
+  animation: fadeIn 1.2s;
+}
+h1 { font-size: 38px; }
+h2 { font-size: 28px; }
+button {
+  padding: 14px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #caa24d;
+  color: white;
+  font-size: 16px;
+}
+nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+nav button {
+  margin: 4px;
+  background: #b88b4a;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.gallery img {
+  width: 100%;
+  border-radius: 14px;
+}
+.flower {
+  position: fixed;
+  top: -80px;
+  width: 40px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; }
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<section id="home">
+  <h1>Айбек & Алина</h1>
+  <p>Мы женимся 💍</p>
+  <button onclick="playMusic()">🎶 Включить музыку</button>
+</section>
+
+<section id="story">
+  <h2>Наша история ❤️</h2>
+  <p>Мы встретились случайно и поняли — это навсегда.</p>
+</section>
+
+<section id="gallery">
+  <h2>Наши моменты 📸</h2>
+  <div class="gallery">
+    <img src="images/photo1.jpg">
+    <img src="images/photo2.jpg">
+  </div>
+</section>
+
+<section id="details">
+  <h2>Ждём вас 💐</h2>
+  <p>📅 12 июля 2026</p>
+  <p>📍 Алматы</p>
+</section>
+
+<nav>
+  <button onclick="scrollToSection('home')">Главная</button>
+  <button onclick="scrollToSection('story')">История</button>
+  <button onclick="scrollToSection('gallery')">Фото</button>
+  <button onclick="scrollToSection('details')">Место</button>
+</nav>
+
+<script>
+function playMusic() {
+  document.getElementById("music").play();
+}
+
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
+
+// падающие цветы
+for (let i = 0; i < 12; i++) {
+  let f = document.createElement("img");
+  f.src = "images/flower.png";
+  f.className = "flower";
+  f.style.left = Math.random() * 100 + "vw";
+  f.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(f);
+}
+</script>
+
+</body>
+</html>
