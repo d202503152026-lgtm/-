@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нұрасыл & Камила | 22.03.2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark-gold: #8d775f;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #4e4e4e;
+            scroll-behavior: smooth;
+            /* ВАШ УЗОРЧАТЫЙ ФОН */
+            background-image: url(https://st2.depositphotos.com/1265408/6384/i/450/depositphotos_63845357-stock-photo-wedding-background.jpg);
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-size: 300px;
+            overflow-x: hidden;
+        }
+
+        /* Полное удаление всех следов красной полоски и системных панелей */
+        .payment-floating-panel, #nprogress, .nprogress-busy, .owner-back-button { 
+            display: none !important; 
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /* КНОПКА МУЗЫКИ */
+        .music-control {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
+            width: 55px; height: 55px; background: var(--gold);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulseMusic 2s infinite; border: 2px solid white;
+        }
+        
+        @keyframes pulseMusic {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+
+        .bg-flowers-fixed {
+            position: fixed; width: 100%; height: 100%; top: 0; left: 0;
+            z-index: -1; pointer-events: none; opacity: 0.4;
+        }
+        .f-fixed { position: absolute; width: 400px; }
+        .f-top { top: -100px; left: -100px; }
+        .f-bottom { bottom: -100px; right: -100px; transform: rotate(180deg); }
+
+        section {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 60px 20px;
+            box-sizing: border-box; text-align: center;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1500');
+            background-size: cover; background-position: center; color: white;
+        }
+        .hero h1 { font-family: 'Great Vibes', cursive; font-size: clamp(3rem, 10vw, 6rem); margin: 0; }
+
+        .countdown-container { display: flex; gap: 10px; margin-top: 30px; }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.85); padding: 10px; border-radius: 10px; min-width: 65px;
+            border: 1px solid var(--gold);
+        }
+        .countdown-item span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--dark-gold); }
+        .countdown-item label { font-size: 0.65rem; color: #444; text-transform: uppercase; }
+
+        /* КАРТОЧКА С ТЕКСТОМ (убрали сплошной белый фон) */
+        .card-with-flowers {
+            background-color: rgba(255, 255, 255, 0.85); /* Полупрозрачный белый */
+            backdrop-filter: blur(8px); /* Эффект матового стекла */
+            -webkit-backdrop-filter: blur(8px);
+            padding: 50px 30px; border-radius: 25px; max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            position: relative; margin: 20px 0;
+        }
+
+        .couple-name { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--gold); margin-bottom: 15px; }
+        .hosts-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); font-weight: bold; }
+
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; width: 280px; margin: 25px auto; }
+        .weekday { font-weight: bold; color: var(--gold); font-size: 0.8rem; }
+        .day { padding: 10px 0; font-size: 1rem; color: #555; }
+        .day.active { background: var(--gold); color: white; border-radius: 50%; font-weight: bold; }
+
+        .btn {
+            display: inline-block; padding: 18px 30px; border-radius: 50px; text-decoration: none;
+            font-weight: 600; margin: 10px; width: 80%; max-width: 280px; transition: 0.3s;
+        }
+        .btn-2gis { background-color: #64b102; color: white; }
+        .btn-wa { background-color: var(--dark-gold); color: white; }
+    </style>
+</head>
+<body>
+
+    <audio id="weddingMusic" loop>
+        <source src="https://files.catbox.moe/mmwujl.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control" onclick="toggleMusic()" id="musicBtn">
+        <span id="musicIcon" style="color: white; font-size: 24px;">🎵</span>
+    </div>
+
+    <div class="bg-flowers-fixed">
+        <img src="https://www.pngarts.com/files/3/Wedding-Flowers-PNG-High-Quality-Image.png" class="f-fixed f-top">
+        <img src="https://www.pngarts.com/files/3/Wedding-Flowers-PNG-High-Quality-Image.png" class="f-fixed f-bottom">
+    </div>
+
+    <section class="hero">
+        <div class="animate__animated animate__fadeIn">
+            <h1>Нұрасыл & Камила</h1>
+            <p style="font-size: 1.5rem; letter-spacing: 3px;">22.03.2026</p>
+            <div class="countdown-container">
+                <div class="countdown-item"><span id="days">00</span><label>Күн</label></div>
+                <div class="countdown-item"><span id="hours">00</span><label>Сағат</label></div>
+                <div class="countdown-item"><span id="minutes">00</span><label>Мин</label></div>
+                <div class="countdown-item"><span id="seconds">00</span><label>Сек</label></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="card-with-flowers animate__animated animate__fadeInUp">
+            <div class="couple-name">Нұрасыл & Камила</div>
+            <p>Қымбатты достар мен жақындар! Біз өз махаббатымызды нығайтып, жаңа өмірге қадам басқалы жатырмыз. Осынау бақытты сәтте сіздерді өз тойымыздың қадірлі қонағы ретінде көргіміз келеді!</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="card-with-flowers">
+            <div class="hosts-name">Той иелері: Төлеген — Альберта</div>
+            <p>Қадірлі ағайын-туыс! Ұлымыз бен келініміздің шаңырақ көтеру тойына арналған салтанатты ақ дастарханымызға шақырамыз.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="card-with-flowers">
+            <h3 style="font-family: 'Playfair Display'; color: var(--dark-gold);">Наурыз 2026</h3>
+            <div class="calendar-grid">
+                <div class="weekday">Дс</div><div class="weekday">Сс</div><div class="weekday">Ср</div><div class="weekday">Бс</div><div class="weekday">Жм</div><div class="weekday">Сн</div><div class="weekday">Жс</div>
+                <div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day">1</div>
+                <div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div>
+                <div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div>
+                <div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day active">22</div>
+                <div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div>
+                <div class="day">30</div><div class="day">31</div>
+            </div>
+            <p><strong>22 наурыз, 17:00</strong></p>
+        </div>
+    </section>
+
+    <section>
+        <div class="card-with-flowers">
+            <div style="font-family: 'Playfair Display'; font-size: 1.8rem; color: var(--dark-gold); margin-bottom: 15px;">Біз сіздерді күтеміз!</div>
+            <p style="font-size: 1.2rem; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); padding: 15px 0; margin: 15px 0;">
+                <strong>Grand Tumar Hall</strong><br>
+                Алматы қаласы, Шынгыстау, 2а
+            </p>
+            <a href="https://2gis.kz/almaty/geo/70000001054312047" target="_blank" class="btn btn-2gis">📍 2ГИС Картасы</a>
+            <br>
+            <a href="https://wa.me/77001234567" class="btn btn-wa">✅ WhatsApp Жауап беру</a>
+        </div>
+    </section>
+
+    <script>
+        const audio = document.getElementById("weddingMusic");
+        const musicIcon = document.getElementById("musicIcon");
+        const musicBtn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicIcon.innerHTML = "⏸";
+                musicBtn.style.animation = "pulseMusic 2s infinite";
+            } else {
+                audio.pause();
+                musicIcon.innerHTML = "🎵";
+                musicBtn.style.animation = "none";
+            }
+        }
+
+        const weddingDate = new Date("March 22, 2026 17:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            if (distance < 0) return;
+            document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html>
